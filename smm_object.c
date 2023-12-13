@@ -60,9 +60,7 @@ typedef struct smmObject {
 //object generation
 void* smmObj_genObject(char* name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade)
 {    
-    smmObject_t* ptr;
-    
-    ptr = (smmObject_t*)malloc(sizeof(smmObject_t));
+    smmObject_t* ptr = (smmObject_t*)malloc(sizeof(smmObject_t));
     
     strcpy(ptr->name, name);
     ptr->objType = objType;

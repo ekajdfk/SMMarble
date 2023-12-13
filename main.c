@@ -7,7 +7,7 @@
 
 #include <time.h>
 #include <string.h>
-#include "smm_object.h"
+//#include "smm_object.h"
 #include "smm_database.h"
 #include "smm_common.h"
 
@@ -36,23 +36,23 @@ typedef struct player {
 static player_t *cur_player;
 //static player_t cur_player[MAX_PLAYER];
 
-#if 0
+
 static int player_energy[MAX_PLAYER];
 static int player_position[MAX_PLAYER];
 static char player_name[MAX_PLAYER][MAX_CHARNAME];
-#endif
+
 
 //function prototypes
-#if 0
+
 int isGraduated(void); //check if any player is graduated
  //print grade history of the player
 void goForward(int player, int step); //make player go "step" steps on the board (check if player is graduated)
 void printPlayerStatus(void); //print all player status at the beginning of each turn
 float calcAverageGrade(int player); //calculate average grade of the player
-smmGrade_e takeLecture(int player, char *lectureName, int credit); //take the lecture (insert a grade of the player)
+//smmGrade_e takeLecture(int player, char *lectureName, int credit); //take the lecture (insert a grade of the player)
 void* findGrade(int player, char *lectureName); //find the grade from the player's grade history
 void printGrades(int player); //print all the grade history of the player
-#endif
+
 
 
 void printGrades(int player)
@@ -111,10 +111,10 @@ int rolldie(int player)
     c = getchar();
     fflush(stdin);
     
-#if 1
+
     if (c == 'g')
         printGrades(player);
-#endif
+
     
     return (rand()%MAX_DIE + 1);
 }
@@ -132,14 +132,15 @@ void actionNode(int player)
     {
         //case lecture:
         case SMMNODE_TYPE_LECTURE:
-             if 
-            cur_player[player].accumCredit += smmObj_getNodeCredit( boardPtr );
-            cur_player[player].energy -= smmObj_getNodeEnergy( boardPtr );
+            if ()
+            {
+               cur_player[player].accumCredit += smmObj_getNodeCredit( boardPtr );
+               cur_player[player].energy -= smmObj_getNodeEnergy( boardPtr );
             
-            //grade generation
-            gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, ??);
-            smmdb_addTail(LISTNO_OFFSET_GRADE + player, gradePtr);
-            
+               //grade generation
+               gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, ??);
+               smmdb_addTail(LISTNO_OFFSET_GRADE + player, gradePtr);
+            }
             break;
             
         default:
@@ -213,7 +214,7 @@ int main(int argc, const char * argv[]) {
     }
     //printf("(%s)", smmObj_getTypeName(SMMNODE_TYPE_LECTURE));
     
-    #if 0
+    
     //2. food card config 
     if ((fp = fopen(FOODFILEPATH,"r")) == NULL)
     {
@@ -222,9 +223,15 @@ int main(int argc, const char * argv[]) {
     }
     
     printf("\n\nReading food card component......\n");
-    while () //read a food parameter set
+    while (fscanf(fp, "%s %i %i %i", name, &type, &credit, &energy) == 4) //read a food parameter set
     {
         //store the parameter set
+        if (type == SMMNODE_TYPE_FOODCHANCE)
+        {
+            void *foodObj = smmObj_genObject(name, smmObjType_board, type, credit, energy, 0);
+            smmdb_addTail(LISTNO_FOODCARD, foodObj);
+            food_nr++;
+        }
     }
     fclose(fp);
     printf("Total number of food cards : %i\n", food_nr);
@@ -239,13 +246,19 @@ int main(int argc, const char * argv[]) {
     }
     
     printf("\n\nReading festival card component......\n");
-    while () //read a festival card string
+    while (fscanf(fp, "%s %i %i %i", name, &type, &credit, &energy) == 4) //read a festival card string
     {
         //store the parameter set
+        if (type == SMMNODE_TYPE_FESTIVAL)
+        {
+            void *festObj = smmObj_genObject(name, smmObjType_board, type, credit, energy, 0);
+            smmdb_addTail(LISTNO_FESTCARD, festObj);
+            festival_nr++;
+        }
     }
     fclose(fp);
     printf("Total number of festival cards : %i\n", festival_nr);
-    #endif
+    
     
     
     //2. Player configuration ---------------------------------------------------------------------------------
