@@ -7,7 +7,7 @@
 
 #include <time.h>
 #include <string.h>
-//#include "smm_object.h"
+#include "smm_object.h"
 #include "smm_database.h"
 #include "smm_common.h"
 
@@ -49,7 +49,7 @@ int isGraduated(void); //check if any player is graduated
 void goForward(int player, int step); //make player go "step" steps on the board (check if player is graduated)
 void printPlayerStatus(void); //print all player status at the beginning of each turn
 float calcAverageGrade(int player); //calculate average grade of the player
-//smmGrade_e takeLecture(int player, char *lectureName, int credit); //take the lecture (insert a grade of the player)
+smmGrade_e takeLecture(int player, char *lectureName, int credit); //take the lecture (insert a grade of the player)
 void* findGrade(int player, char *lectureName); //find the grade from the player's grade history
 void printGrades(int player); //print all the grade history of the player
 
@@ -122,25 +122,23 @@ int rolldie(int player)
 //action code when a player stays at a node
 void actionNode(int player)
 {
-    void *boardPtr = smmdb_getData(LISTNO_NODE, cur_player[player].position );
+    void *boardPtr = smmdb_getData(LISTNO_NODE, cur_player[player].position);
     //int type = smmObj_getNodeType( cur_player[player].position );
-    int type = smmObj_getNodeType( boardPtr );
-    char *name = smmObj_getNodeName( boardPtr );
+    int type = smmObj_getNodeType(boardPtr);
+    char *name = smmObj_getNodeName(boardPtr);
     void *gradePtr;
     
     switch(type)
     {
         //case lecture:
         case SMMNODE_TYPE_LECTURE:
-            if ()
-            {
-               cur_player[player].accumCredit += smmObj_getNodeCredit( boardPtr );
-               cur_player[player].energy -= smmObj_getNodeEnergy( boardPtr );
+            cur_player[player].accumCredit += smmObj_getNodeCredit( boardPtr );
+            cur_player[player].energy -= smmObj_getNodeEnergy( boardPtr );
             
-               //grade generation
-               gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, ??);
-               smmdb_addTail(LISTNO_OFFSET_GRADE + player, gradePtr);
-            }
+            //grade generation
+            gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, ??);
+            smmdb_addTail(LISTNO_OFFSET_GRADE + player, gradePtr);
+        
             break;
             
         default:
