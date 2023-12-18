@@ -120,24 +120,6 @@ int rolldie(int player)
 }
 
 
-smmObjGrade_e getRandomGrade(void)
-{
-    smmObjGrade_e gradeList[] = {
-        smmObjGrade_Ap,
-        smmObjGrade_A0,
-        smmObjGrade_Am,
-        smmObjGrade_Bp,
-        smmObjGrade_B0,
-        smmObjGrade_Bm,
-        smmObjGrade_Cp,
-        smmObjGrade_C0,
-        smmObjGrade_Cm
-    };
-
-    return gradeList[rand()%MAX_GRADE];
-}
-
-
 //action code when a player stays at a node
 void actionNode(int player)
 {
