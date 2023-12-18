@@ -48,7 +48,7 @@ typedef enum smmObjType {
     C-
 */
 
-
+smmObjGrade_e getRandomGrade(void);
 
 // object generation
 smmObject_t *smmObj_genObject(char *name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade);
@@ -63,9 +63,6 @@ int smmObj_getNodeEnergy(void *obj);
 
 // element to string
 char *smmObj_getTypeName(int type);
-
-
-#endif /* smm_object_h */
 
 
 

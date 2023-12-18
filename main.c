@@ -119,6 +119,25 @@ int rolldie(int player)
     return (rand()%MAX_DIE + 1);
 }
 
+
+smmObjGrade_e getRandomGrade(void)
+{
+    smmObjGrade_e gradeList[] = {
+        smmObjGrade_Ap,
+        smmObjGrade_A0,
+        smmObjGrade_Am,
+        smmObjGrade_Bp,
+        smmObjGrade_B0,
+        smmObjGrade_Bm,
+        smmObjGrade_Cp,
+        smmObjGrade_C0,
+        smmObjGrade_Cm
+    };
+
+    return gradeList[rand()%MAX_GRADE];
+}
+
+
 //action code when a player stays at a node
 void actionNode(int player)
 {
@@ -136,7 +155,7 @@ void actionNode(int player)
             cur_player[player].energy -= smmObj_getNodeEnergy( boardPtr );
             
             //grade generation
-            gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, ??);
+            gradePtr = smmObj_genObject(name, smmObjType_grade, 0, smmObj_getNodeCredit( boardPtr ), 0, getRandomGrade());
             smmdb_addTail(LISTNO_OFFSET_GRADE + player, gradePtr);
         
             break;
@@ -156,6 +175,8 @@ void goForward(int player, int step)
            cur_player[player].name, cur_player[player].position,
            smmObj_getNodeName(boardPtr));
 }
+
+
 
 
 int main(int argc, const char * argv[]) {
