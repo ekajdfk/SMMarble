@@ -57,41 +57,43 @@ typedef struct smmObject {
 //static int smmObj_noNode = 0;
 
 //3. 관련 함수 변경 
-//object generation
-void* smmObj_genObject(char* name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade)
-{    
-    smmObject_t* ptr = (smmObject_t*)malloc(sizeof(smmObject_t));
-    
+// object generation
+smmObject_t *smmObj_genObject(char *name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade)
+{
+    smmObject_t *ptr = (smmObject_t *)malloc(sizeof(smmObject_t));
+
     strcpy(ptr->name, name);
     ptr->objType = objType;
     ptr->type = type;
     ptr->credit = credit;
     ptr->energy = energy;
     ptr->grade = grade;
-    
+
     return ptr;
 }
 
-//3. 관련 함수 변경 
-char* smmObj_getNodeName(void* obj)
-{
-    smmObject_t* ptr = (smmObject_t*)obj;
-    
+
+// member retrieving
+char *smmObj_getNodeName(void *obj) {
+    smmObject_t *ptr = (smmObject_t *)obj;
+
     return ptr->name;
 }
 
-//3. 관련 함수 변경 
-int smmObj_getNodeType(int node_nr)
-{
-    return smm_node[node_nr].type;
+int smmObj_getNodeType(void *obj) {
+    smmObject_t *ptr = (smmObject_t *)obj;
+
+    return ptr->type;
 }
 
-int smmObj_getNodeCredit(int node_nr)
-{
-    return smm_node[node_nr].credit;
+int smmObj_getNodeCredit(void *obj) {
+    smmObject_t *ptr = (smmObject_t *)obj;
+
+    return ptr->credit;
 }
 
-int smmObj_getNodeEnergy(int node_nr)
-{
-    return smm_node[node_nr].energy;
+int smmObj_getNodeEnergy(void *obj) {
+    smmObject_t *ptr = (smmObject_t *)obj;
+
+    return ptr->energy;
 }

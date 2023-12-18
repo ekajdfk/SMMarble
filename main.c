@@ -148,13 +148,13 @@ void actionNode(int player)
 
 void goForward(int player, int step)
 {
-     void *boardPtr;
-     cur_player[player].position += step;
-     boardPtr = smmdb_getData(LISTNO_NODE, cur_player[player].position );
-     
-     printf("%s go to node %i (name: %s)\n", 
-                cur_player[player].name, cur_player[player].position,
-                smmObj_getNodeName(boardPtr);
+    void *boardPtr;
+    cur_player[player].position += step;
+    boardPtr = smmdb_getData(LISTNO_NODE, cur_player[player].position);
+
+    printf("%s go to node %i (name: %s)\n",
+           cur_player[player].name, cur_player[player].position,
+           smmObj_getNodeName(boardPtr));
 }
 
 
