@@ -25,6 +25,19 @@ typedef enum smmObjType {
     smmObjType_grade
 } smmObjType_e;
 
+
+typedef enum smmObjGrade {
+    smmObjGrade_Ap = 0,
+    smmObjGrade_A0,
+    smmObjGrade_Am,
+    smmObjGrade_Bp,
+    smmObjGrade_B0,
+    smmObjGrade_Bm,
+    smmObjGrade_Cp,
+    smmObjGrade_C0,
+    smmObjGrade_Cm
+} smmObjGrade_e;
+
 /* node type :
     lecture,
     restaurant,
@@ -47,6 +60,8 @@ typedef enum smmObjType {
     C0,
     C-
 */
+
+
 smmObjGrade_e getRandomGrade(void);
 
 // object generation
