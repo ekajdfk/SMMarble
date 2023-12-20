@@ -45,22 +45,10 @@ typedef enum smmObjGrade {
 #endif
 
 
-smmObjGrade_e getRandomGrade(void)
-{
-    smmObjGrade_e gradeList[] = {
-        smmObjGrade_Ap,
-        smmObjGrade_A0,
-        smmObjGrade_Am,
-        smmObjGrade_Bp,
-        smmObjGrade_B0,
-        smmObjGrade_Bm,
-        smmObjGrade_Cp,
-        smmObjGrade_C0,
-        smmObjGrade_Cm
-    };
-
-    return gradeList[rand()%MAX_GRADE];
+smmObjGrade_e getRandomGrade(void) {
+    return smmObj_getNodeGrade(smmObj_genObject("temp", smmObjType_grade, 0, 0, 0, 0));
 }
+
 
 
 //1. 구조체 형식 정의 
@@ -83,7 +71,7 @@ struct smmObject {
 //3. 관련 함수 변경 
 // object generation
 smmObject_t *smmObj_genObject(char *name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade)
-{
+{      
     smmObject_t *ptr = (smmObject_t *)malloc(sizeof(smmObject_t));
 
     strcpy(ptr->name, name);

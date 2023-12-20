@@ -59,6 +59,7 @@ void printGrades(int player)
 {
      int i;
      void *gradePtr;
+     
      for (i=0;i<smmdb_len(LISTNO_OFFSET_GRADE + player);i++)
      {
          gradePtr = smmdb_getData(LISTNO_OFFSET_GRADE + player, i);
