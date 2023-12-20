@@ -26,6 +26,8 @@ typedef enum smmObjType {
 } smmObjType_e;
 
 
+typedef struct smmObject smmObject_t;
+
 typedef enum smmObjGrade {
     smmObjGrade_Ap = 0,
     smmObjGrade_A0,
@@ -62,17 +64,19 @@ typedef enum smmObjGrade {
 */
 
 
-smmObjGrade_e getRandomGrade(void);
+
 
 // object generation
 smmObject_t *smmObj_genObject(char *name, smmObjType_e objType, int type, int credit, int energy, smmObjGrade_e grade);
 
+smmObjGrade_e getRandomGrade(void);
 
 // member retrieving
 char *smmObj_getNodeName(void *obj);
 int smmObj_getNodeType(void *obj);
 int smmObj_getNodeCredit(void *obj);
 int smmObj_getNodeEnergy(void *obj);
+char smmObj_getNodeGrade(void *obj);
 
 
 // element to string

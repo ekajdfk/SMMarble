@@ -30,21 +30,19 @@ char* smmObj_getTypeName(int type)
 }
 
 
-
-
-
-
-
-//1. 구조체 형식 정의 
-typedef struct smmObject {
-       char name[MAX_CHARNAME];
-       smmObjType_e objType; 
-       int type;
-       int credit;
-       int energy;
-       smmObjGrade_e grade;
-} smmObject_t;
-
+#if 0
+typedef enum smmObjGrade {
+    smmObjGrade_Ap = 0,
+    smmObjGrade_A0,
+    smmObjGrade_Am,
+    smmObjGrade_Bp,
+    smmObjGrade_B0,
+    smmObjGrade_Bm,
+    smmObjGrade_Cp,
+    smmObjGrade_C0,
+    smmObjGrade_Cm
+} smmObjGrade_e;
+#endif
 
 
 smmObjGrade_e getRandomGrade(void)
@@ -63,6 +61,21 @@ smmObjGrade_e getRandomGrade(void)
 
     return gradeList[rand()%MAX_GRADE];
 }
+
+
+//1. 구조체 형식 정의 
+struct smmObject {
+       char name[MAX_CHARNAME];
+       smmObjType_e objType; 
+       int type;
+       int credit;
+       int energy;
+       smmObjGrade_e grade;
+};
+
+
+
+
 
 //static smmObject_t smm_node[MAX_NODE];
 //static int smmObj_noNode = 0;
@@ -107,4 +120,10 @@ int smmObj_getNodeEnergy(void *obj) {
     smmObject_t *ptr = (smmObject_t *)obj;
 
     return ptr->energy;
+}
+
+char smmObj_getNodeGrade(void *obj) {
+    smmObject_t *ptr = (smmObject_t *)obj;
+
+    return ptr->grade;
 }
