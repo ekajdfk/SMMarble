@@ -122,7 +122,7 @@ int smmObj_getNodeEnergy(void *obj) {
     return ptr->energy;
 }
 
-char smmObj_getNodeGrade(void *obj) {
+smmObjGrade_e smmObj_getNodeGrade(void *obj) {
     smmObject_t *ptr = (smmObject_t *)obj;
 
     return ptr->grade;
